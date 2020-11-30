@@ -44,14 +44,14 @@ def count(thresholded, segmented, frame_cp):
     (countours, _) = cv2.findContours(roi.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
     count = 0
     for countour in countours:
-        _, y, _, h = cv2.boundingRect(countour)
-        if ((y + (y * 0.25)) > (y + h)) and ((l * 0.25) > countour.shape[0]):
+        _, y1, _, h = cv2.boundingRect(countour)
+        if ((y + (y * 0.25)) > (y1 + h)) and ((l * 0.25) > countour.shape[0]):
             count += 1
     return count
 
 if __name__ == "__main__":
     w = 0.5
-    path = "./videos/2.mkv"
+    path = "./videos/1.mkv"
     input = cv2.VideoCapture(path)
     frames_counter = 0
     result = None
