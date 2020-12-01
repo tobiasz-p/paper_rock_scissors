@@ -1,6 +1,7 @@
 import cv2
 import time
 import numpy as np
+import sys
 import imutils
 from sklearn.metrics import pairwise
 
@@ -50,7 +51,7 @@ def count(thresholded, segmented, frame_cp):
 
 if __name__ == "__main__":
     w = 0.5
-    path = "./videos/1.mkv"
+    path = sys.argv[1]
     input = cv2.VideoCapture(path)
     frames_counter = 0
     result = None
