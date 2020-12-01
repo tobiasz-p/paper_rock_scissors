@@ -45,7 +45,7 @@ def count(thresholded, segmented, frame_cp):
     count = 0
     for countour in countours:
         _, y1, _, h = cv2.boundingRect(countour)
-        if ((y + (y * 0.25)) > (y1 + h)) and ((l * 0.25) > countour.shape[0]):
+        if (1.25*y > (y1 + h)) and ((0.25*l) > countour.shape[0]):
             count += 1
     return count
 
@@ -77,10 +77,10 @@ if __name__ == "__main__":
                     result = "rock"
                 elif fingers == 2:
                     result = "scissors"
-                elif result > 3:
+                elif fingers > 3:
                      result = "paper"
                 if result is not None:
-                    cv2.putText(frame_cp, result, (70, 45), cv2.FONT_HERSHEY_TRIPLEX, 1, (0,0,255), 2)
+                    cv2.putText(frame_cp, result, (70, 45), cv2.FONT_HERSHEY_TRIPLEX, 1, (47, 255, 43), 2)
                 cv2.imshow("Thesholded", thresholded)
                 time.sleep(0.01)
 
