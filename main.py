@@ -1,8 +1,8 @@
 import cv2
-import imutils
-import numpy as np
-from sklearn.metrics import pairwise
 import time
+import numpy as np
+import imutils
+from sklearn.metrics import pairwise
 
 background = None
 
@@ -13,17 +13,16 @@ def avg(image, w):
         return
     cv2.accumulateWeighted(image, background, w)
 
-
 def segmentation(image, th=25):
     global background
     diff = cv2.absdiff(background.astype("uint8"), image)
     thresholded = cv2.threshold(diff, th, 255, cv2.THRESH_BINARY)[1]
     countours, _ = cv2.findContours(thresholded.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    if len(countours) == 0:
-        return
-    else:
+    if len(countours) != 0:
         segmented = max(countours, key=cv2.contourArea)
         return (thresholded, segmented)
+    else:
+        return
 
 def count(thresholded, segmented, frame_cp):
     hull = cv2.convexHull(segmented)
@@ -59,6 +58,8 @@ if __name__ == "__main__":
     while(True):
         _, frame = input.read()
         frame = cv2.flip(frame, 1)
+        if frame is not None:
+            frame = imutils.resize(frame, width=700)
         frame_cp = frame.copy()
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         gray = cv2.GaussianBlur(gray, (7, 7), 0)
@@ -85,7 +86,7 @@ if __name__ == "__main__":
         frames_counter += 1
         cv2.imshow("Video", frame_cp)
         key = cv2.waitKey(1) & 0xFF
-        if key == ord("q"):
+        if key == ord("s"):
             break
 
 input.release()
