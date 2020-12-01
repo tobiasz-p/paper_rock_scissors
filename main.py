@@ -61,9 +61,9 @@ if __name__ == "__main__":
         frame = cv2.flip(frame, 1)
         if frame is not None:
             frame = imutils.resize(frame, width=700)
-        frame_cp = frame.copy()
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        gray = cv2.GaussianBlur(gray, (7, 7), 0)
+            frame_cp = frame.copy()
+            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            gray = cv2.GaussianBlur(gray, (7, 7), 0)
 
         if frames_counter < 30:
             avg(gray, w)
