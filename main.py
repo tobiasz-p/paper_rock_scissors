@@ -77,7 +77,7 @@ if __name__ == "__main__":
                     result = "rock"
                 elif fingers == 2:
                     result = "scissors"
-                elif fingers == 5:
+                elif result > 3:
                      result = "paper"
                 if result is not None:
                     cv2.putText(frame_cp, result, (70, 45), cv2.FONT_HERSHEY_TRIPLEX, 1, (0,0,255), 2)
@@ -89,6 +89,5 @@ if __name__ == "__main__":
         key = cv2.waitKey(1) & 0xFF
         if key == ord("s"):
             break
-
-input.release()
-cv2.destroyAllWindows()
+    input.release()
+    cv2.destroyAllWindows()
